@@ -22,5 +22,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'ARTS_DEVICE_MOCKUPS_PLUGIN_VERSION', '0.1.0' );
 
 require_once __DIR__ . '/vendor/autoload.php';
+// The production autoloader is regenerated without package `files` entries (root classmap only),
+// so the shared template-part global must be loaded explicitly; its function_exists guard makes
+// the dev-time double load (vendor files autoload + this require) a no-op.
+require_once __DIR__ . '/vendor-prefixed/arts/get-template-part/src/php/arts-get-template-part.php';
 
-// Scaffold stub: the extraction of arts-store-mockups boots \Arts\DeviceMockups\Plugin here.
+\Arts\DeviceMockups\Plugin::instance();

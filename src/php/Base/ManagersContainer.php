@@ -9,7 +9,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Extraction fills the @property list as managers land (Elementor, Assets, …).
+ * @property \Arts\DeviceMockups\Managers\Elementor $elementor
+ * @property \Arts\DeviceMockups\Managers\Assets    $assets
  */
 class ManagersContainer extends BaseManagersContainer {
 }
