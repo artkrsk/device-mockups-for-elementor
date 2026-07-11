@@ -1,1 +1,1 @@
-export type TSkin = 'bare' | 'laptop' | 'tablet' | 'browser'
+export type TSkin = 'bare' | 'laptop' | 'tablet' | 'browser' | 'phone'

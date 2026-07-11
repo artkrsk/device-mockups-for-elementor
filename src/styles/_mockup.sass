@@ -181,6 +181,39 @@
 .arts-device-mockup_tablet_portrait .arts-device-mockup__screen
   aspect-ratio: 2 / 3
 
+// ── Phone ─────────────────────────────────────────────────────────────────────
+// Portrait-only pocket device: same uniform-bezel construction as the tablet, phone
+// proportions. Geometry is proportioned against the tablet frame (no mockup-factory
+// reference exists for this skin), brand-neutral by design.
+.arts-device-mockup_phone .arts-device-mockup__frame
+  position: relative
+  width: 100%
+  padding: 2.6cqw
+  background: var(--arts-device-mockup-body-color)
+  border: 0.35cqw solid var(--arts-device-mockup-border-color)
+  border-radius: 8.5cqw
+  box-shadow: var(--arts-device-mockup-ring-shadow)
+
+.arts-device-mockup_phone .arts-device-mockup__screen
+  aspect-ratio: 9 / 19.5
+  border-radius: 6cqw
+
+// Island pill — floats inside the screen top. A ::after on the __frame (not the screen)
+// so the screen's overflow:hidden can't clip it; z-index 2 keeps it above an active
+// gallery item (z-index 1) and the video embed. Colored by the camera token so the
+// Camera control themes it.
+.arts-device-mockup_phone .arts-device-mockup__frame::after
+  content: ''
+  position: absolute
+  top: 4.6cqw
+  left: 50%
+  transform: translateX(-50%)
+  width: 24cqw
+  height: 6.2cqw
+  border-radius: 999px
+  background: var(--arts-device-mockup-camera-color)
+  z-index: 2
+
 // ── Browser (macOS · hairline) ──────────────────────────────────────────────────
 // figure IS the window frame. Unlike the laptop/tablet (physical devices whose bezels scale with
 // the device), the browser chrome is software UI — a real address bar is a roughly-constant height

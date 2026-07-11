@@ -10,6 +10,7 @@ use Arts\DeviceMockups\Elementor\Skins\Skin_Bare;
 use Arts\DeviceMockups\Elementor\Skins\Skin_Laptop;
 use Arts\DeviceMockups\Elementor\Skins\Skin_Tablet;
 use Arts\DeviceMockups\Elementor\Skins\Skin_Browser;
+use Arts\DeviceMockups\Elementor\Skins\Skin_Phone;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Image_Size;
 use Elementor\Group_Control_Typography;
@@ -89,6 +90,7 @@ class MockupWidget extends \Elementor\Widget_Base {
 		$this->add_skin( new Skin_Laptop( $this ) );
 		$this->add_skin( new Skin_Tablet( $this ) );
 		$this->add_skin( new Skin_Browser( $this ) );
+		$this->add_skin( new Skin_Phone( $this ) );
 	}
 
 	/**
@@ -462,6 +464,7 @@ class MockupWidget extends \Elementor\Widget_Base {
 					'3/2'  => '3:2',
 					'4/3'  => '4:3',
 					'16/9' => '16:9',
+					'1/1'  => '1:1',
 					'2/3'  => '2:3',
 					'9/16' => '9:16',
 				),
@@ -560,7 +563,7 @@ class MockupWidget extends \Elementor\Widget_Base {
 			'color_body'   => array(
 				'label' => esc_html__( 'Body', 'device-mockups-for-elementor' ),
 				'var'   => '--arts-device-mockup-body-color',
-				'skins' => array( 'laptop', 'tablet', 'browser' ),
+				'skins' => array( 'laptop', 'tablet', 'browser', 'phone' ),
 			),
 			'color_chrome' => array(
 				'label' => esc_html__( 'Chrome', 'device-mockups-for-elementor' ),
@@ -575,7 +578,7 @@ class MockupWidget extends \Elementor\Widget_Base {
 			'color_border' => array(
 				'label' => esc_html__( 'Border', 'device-mockups-for-elementor' ),
 				'var'   => '--arts-device-mockup-border-color',
-				'skins' => array( 'laptop', 'tablet', 'browser' ),
+				'skins' => array( 'laptop', 'tablet', 'browser', 'phone' ),
 			),
 			'color_rule'   => array(
 				'label' => esc_html__( 'Rule', 'device-mockups-for-elementor' ),
@@ -595,7 +598,7 @@ class MockupWidget extends \Elementor\Widget_Base {
 			'color_camera' => array(
 				'label' => esc_html__( 'Camera', 'device-mockups-for-elementor' ),
 				'var'   => '--arts-device-mockup-camera-color',
-				'skins' => array( 'laptop' ),
+				'skins' => array( 'laptop', 'phone' ),
 			),
 		);
 
