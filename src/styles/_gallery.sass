@@ -1,0 +1,11 @@
+// Gallery rotation — discrete switch (no crossfade). Fill (position/inset/size/object-fit) is
+// owned by the media rules in _mockup.sass; this file only owns the show/hide state.
+.arts-device-mockup__gallery-item
+  opacity: 0.0001
+  backface-visibility: hidden
+  will-change: opacity
+
+@for $i from 0 through 9
+  [data-arts-device-mockup-gallery-active="#{$i}"] .arts-device-mockup__gallery-item[data-arts-device-mockup-gallery-index="#{$i}"]
+    opacity: 1
+    z-index: 1

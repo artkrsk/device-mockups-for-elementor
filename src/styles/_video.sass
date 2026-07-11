@@ -1,0 +1,36 @@
+// External-video (YouTube / Vimeo) embed. The JS players inject an iframe into this wrapper; object-fit
+// doesn't apply to iframes, so cover-sizing is done in pure CSS instead of Elementor's per-resize JS:
+// the screen is promoted to a SIZE container (its height is already determinate via the per-skin
+// aspect-ratio) so we can read cqw + cqh, then force the iframe to a 16:9 box at least as large as the
+// screen on both axes and centre it; the screen's overflow:hidden clips the excess.
+.arts-device-mockup__screen
+  container-type: size
+
+// Sits above the server-rendered poster (later in the DOM, no z-index needed) but below an active
+// gallery item (z-index:1), so hover-rotation still covers a paused video. pointer-events:none lets
+// the wrapping link keep its clicks/hover.
+//
+// --_overscan oversizes the iframe past cover so the platform's edge chrome is clipped by overflow.
+// Vimeo's background mode is already chromeless → 1 (no crop). YouTube can't be made chromeless via
+// its API, so its embed clips the title (top) + logo (bottom) at the cost of a little video edge.
+.arts-device-mockup__video-embed
+  --_overscan: 1
+  position: absolute
+  inset: 0
+  overflow: hidden
+  pointer-events: none
+
+.arts-device-mockup__video-embed_youtube
+  --_overscan: var(--arts-device-mockup-video-overscan, 1.2)
+
+// `.arts-device-mockup` prefix + max-*:none beat any `.elementor iframe` reset, same tactic as the media rules.
+.arts-device-mockup .arts-device-mockup__video-embed iframe
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+  border: 0
+  max-width: none
+  max-height: none
+  width: calc(max(100cqw, 100cqh * 16 / 9) * var(--_overscan))
+  height: calc(max(100cqh, 100cqw * 9 / 16) * var(--_overscan))
