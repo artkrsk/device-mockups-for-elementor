@@ -5,3 +5,4 @@
  */
 
 define( 'ARTS_DEVICE_MOCKUPS_PLUGIN_VERSION', '0.1.0' );
+define( 'ARTS_DEVICE_MOCKUPS_TEMPLATES_DIR', __DIR__ . '/src/php/templates' );

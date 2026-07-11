@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1a3423257fa18dbebf54bc609fe929e3",
+    "content-hash": "743056b65438169dcb3ac21778199e3c",
     "packages": [
         {
             "name": "arts/base",
@@ -54,6 +54,107 @@
                 "source": "https://github.com/artkrsk/arts-base/tree/v1.1.1"
             },
             "time": "2026-05-16T17:59:51+00:00"
+        },
+        {
+            "name": "arts/get-template-part",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/artkrsk/arts-get-template-part.git",
+                "reference": "fcf30c368b71e016c843fef112ae8eeeeb01eaf0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/artkrsk/arts-get-template-part/zipball/fcf30c368b71e016c843fef112ae8eeeeb01eaf0",
+                "reference": "fcf30c368b71e016c843fef112ae8eeeeb01eaf0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0"
+            },
+            "require-dev": {
+                "captainhook/captainhook": "^5.27",
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+                "ergebnis/composer-normalize": "^2.48",
+                "phpstan/phpstan": "^2.0",
+                "squizlabs/php_codesniffer": "^3.13.4",
+                "szepeviktor/phpstan-wordpress": "^2.0",
+                "wp-coding-standards/wpcs": "^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/php/arts-get-template-part.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "description": "Global arts_get_template_part() function with theme override support for WordPress plugins.",
+            "keywords": [
+                "partial",
+                "template",
+                "theme-override",
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/artkrsk/arts-get-template-part/issues",
+                "source": "https://github.com/artkrsk/arts-get-template-part/tree/v1.0.1"
+            },
+            "time": "2026-07-11T18:54:33+00:00"
+        },
+        {
+            "name": "arts/utilities",
+            "version": "v2.5.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/artkrsk/arts-utilities.git",
+                "reference": "abfc1b1b12e206df84a8ba99e94072a71cc542cb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/artkrsk/arts-utilities/zipball/abfc1b1b12e206df84a8ba99e94072a71cc542cb",
+                "reference": "abfc1b1b12e206df84a8ba99e94072a71cc542cb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0"
+            },
+            "require-dev": {
+                "arts/elementor-stubs": "@dev",
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+                "ergebnis/composer-normalize": "^2.48",
+                "php-stubs/acf-pro-stubs": "^6.5",
+                "php-stubs/woocommerce-stubs": "^10.5",
+                "php-stubs/wp-cli-stubs": "^2.12",
+                "phpstan/phpstan": "^2.0",
+                "squizlabs/php_codesniffer": "^3.13.4",
+                "szepeviktor/phpstan-wordpress": "^2.0",
+                "wp-coding-standards/wpcs": "^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Arts\\Utilities\\": "src/php/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Artem Semkin",
+                    "email": "me@artemsemkin.com"
+                }
+            ],
+            "description": "A comprehensive collection of utility methods for WordPress theme and plugin development, with a focus on Elementor integration.",
+            "support": {
+                "issues": "https://github.com/artkrsk/arts-utilities/issues",
+                "source": "https://github.com/artkrsk/arts-utilities/tree/v2.5.5"
+            },
+            "time": "2026-07-02T19:41:07+00:00"
         }
     ],
     "packages-dev": [
