@@ -497,7 +497,7 @@ class MockupWidget extends \Elementor\Widget_Base {
 			array(
 				'label'      => esc_html__( 'Object position X', 'device-mockups-for-elementor' ),
 				'type'       => Controls_Manager::SLIDER,
-				'size_units' => array( '%', 'px' ),
+				'size_units' => array( '%', 'px', 'custom' ),
 				'default'    => array(
 					'size' => 50,
 					'unit' => '%',
@@ -524,7 +524,7 @@ class MockupWidget extends \Elementor\Widget_Base {
 			array(
 				'label'      => esc_html__( 'Object position Y', 'device-mockups-for-elementor' ),
 				'type'       => Controls_Manager::SLIDER,
-				'size_units' => array( '%', 'px' ),
+				'size_units' => array( '%', 'px', 'custom' ),
 				'default'    => array(
 					'size' => 50,
 					'unit' => '%',
@@ -640,7 +640,7 @@ class MockupWidget extends \Elementor\Widget_Base {
 			array(
 				'label'      => esc_html__( 'Corner radius', 'device-mockups-for-elementor' ),
 				'type'       => Controls_Manager::SLIDER,
-				'size_units' => array( 'cqw', '%', 'px' ),
+				'size_units' => array( 'cqw', '%', 'px', 'custom' ),
 				'range'      => array(
 					'cqw' => array(
 						'min'  => 0,
