@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Laptop skin — renders the full MacBook-style device frame with lid, camera, screen,
- * base, and notch. Default skin for product hero and below-fold mockups.
+ * base, and notch. Recommended skin for product hero and below-fold mockups.
  */
 class Skin_Laptop extends BaseSkin {
 

@@ -1,6 +1,6 @@
 # Arts Device Mockups for Elementor
 
-Standalone wp.org plugin: device mockups (browser, laptop, tablet, bare frames) as a native
+Standalone wp.org plugin: device mockups (browser, laptop, tablet, phone, bare frames) as a native
 Elementor **widget** with skins, rendering image/video/gallery screens. Extraction of
 `arts-store-mockups` (ArtsStore monorepo, `/Users/art/Projects/ArtsStore/packages/arts-store-mockups`)
 — the donor stays in the shop; this repo lives its own life. The build/tooling chassis is the
@@ -81,5 +81,4 @@ real source. Route via the Task/Agent tool:
 - Tests are logic-only — no UI/markup/rendering tests.
 - The donor's shop-coupled deps (`arts/store-shared`, `arts/store-ui`) do NOT come along —
   strip or inline their usages during extraction. `arts/utilities` and
-  `arts/get-template-part` join `require` + the Strauss `packages` list when the extracted
-  source lands (verify Packagist availability first; the monorepo consumes them as path repos).
+  `arts/get-template-part` are in `require` + the Strauss `packages` list.

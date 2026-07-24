@@ -4,7 +4,7 @@
  * hover-gallery items, all from attachment IDs via WP core functions (responsive srcset/sizes/lazy,
  * proper alt). Included by every skin partial so the media markup lives in one place.
  *
- * Expects the id-based $args contract: image_id, video_type, video_hosted_id, poster_id, video_url,
+ * Expects the id-based $args contract: image_id, video_type, video_hosted_id, poster_id, video_hosted_url,
  * gallery_ids, media_size.
  */
 

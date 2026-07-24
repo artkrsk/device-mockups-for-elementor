@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 use ArtsDeviceMockups\Arts\Utilities\Utilities;
 
 /**
- * Abstract base for all four MockupWidget skins. Provides the build_args() helper
+ * Abstract base for all five MockupWidget skins. Provides the build_args() helper
  * that maps the flat settings array to the $args contract expected by template partials.
  */
 abstract class BaseSkin extends \Elementor\Skin_Base {

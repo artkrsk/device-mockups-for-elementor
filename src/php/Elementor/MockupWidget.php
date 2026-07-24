@@ -94,17 +94,17 @@ class MockupWidget extends \Elementor\Widget_Base {
 	}
 
 	/**
-	 * Register all shared controls (Content tab + Style tab). Skins add their own
+	 * Register all shared controls (Content, Settings, Layout, and Style tabs). Skins add their own
 	 * controls via _register_controls_actions() + after_section_end actions.
 	 *
 	 * @return void
 	 */
 	protected function _register_controls(): void {
 
-		// Sections are grouped Content → Settings → Layout → Style here purely for source readability;
-		// the editor panel actually orders tabs by Elementor's fixed canonical sequence (Content, Style,
-		// Advanced, Responsive, Layout, Settings), not by registration order. All four used here are
-		// native Elementor tabs.
+		// Sections are grouped by tab (Content → Settings → Layout → Style) for source readability; the
+		// editor's tab bar follows the order each tab is FIRST registered, so this grouping is also the
+		// panel order — Elementor appends its shared tabs (e.g. Advanced) after these. All four used here
+		// are native Elementor tabs.
 
 		// ── Content tab ──────────────────────────────────────────────────────
 
