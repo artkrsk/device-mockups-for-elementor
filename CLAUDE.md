@@ -29,7 +29,7 @@ pnpm lint       # biome check (build/, dev/, src/ts — config in biome.json)
 ```
 
 Fresh clone: `composer install`, create `.env` with `DEV_TARGET=<Local site plugin dir>`, then
-`pnpm dev`. Strauss prefixes `arts/base` into `vendor-prefixed/` under `ArtsDeviceMockups\` via
+`pnpm dev:plugin`. Strauss prefixes `arts/base` into `vendor-prefixed/` under `ArtsDeviceMockups\` via
 the composer post-install/post-update hooks. ONE config file (`project.config.js`, unknown keys
 are hard errors); machine-specific `DEV_TARGET` lives in the gitignored `.env`; `pnpm build`
 needs no `.env` (CI-safe). Production compiles into a staging dir under `dist/` and never
@@ -75,7 +75,7 @@ real source. Route via the Task/Agent tool:
 - Naming family (frozen once released): namespace `Arts\DeviceMockups` · prefixes
   `arts_device_mockups_*` / `ARTS_DEVICE_MOCKUPS_*` · text domain `device-mockups-for-elementor`.
 - `composer.json` is the source of truth for plugin meta AND the version (`version` field →
-  header, readme Stable tag, PHP define, package.json, banners; stamped by `build/meta.js`).
+  header, readme Stable tag, PHP define, package.json, banners; stamped by `arts-wp (the @arts/wp-plugin-tooling package — build/release/changelog mechanics live there)`).
   Edit composer.json, never the stamped fields directly.
 - `vendor/` ships autoloader-only in production; packages live prefixed in `vendor-prefixed/`.
 - Tests are logic-only — no UI/markup/rendering tests.

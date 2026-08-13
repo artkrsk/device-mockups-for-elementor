@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-use \Elementor\Controls_Manager;
+use Elementor\Controls_Manager;
 
 /**
  * Tablet skin — renders a tablet device frame. Adds an orientation control
@@ -67,7 +67,7 @@ class Skin_Tablet extends BaseSkin {
 						'title' => esc_html__( 'Landscape', 'device-mockups-for-elementor' ),
 						'icon'  => 'eicon-device-tablet',
 					),
-					'portrait' => array(
+					'portrait'  => array(
 						'title' => esc_html__( 'Portrait', 'device-mockups-for-elementor' ),
 						'icon'  => 'eicon-device-mobile',
 					),

@@ -18,4 +18,4 @@ Scaffold stub — the description arrives with the extraction of the mockups wid
 == Changelog ==
 
 = 0.1.0 =
-* Scaffold: build tooling, CI gates, and release pipeline in place; widget extraction pending.
+Initial release.

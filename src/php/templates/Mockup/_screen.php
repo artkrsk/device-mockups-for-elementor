@@ -25,7 +25,7 @@ $gallery_ids = Utilities::get_array_value( $args['gallery_ids'] ?? array() );
 // value WP core's loading-optimization heuristic omits loading=lazy for the first few images it renders
 // in OUTPUT order (not viewport order) — which can be a hidden offscreen card, not the hero.
 // Callers pass 'lazy' (offscreen contexts) or 'eager' + 'high' (a hero); empty keeps core's default.
-$media_attrs = array(
+$media_attrs         = array(
 	'class' => 'arts-device-mockup__media',
 	'sizes' => '100vw',
 );
@@ -75,11 +75,11 @@ $hosted_mime = $hosted_id > 0 ? ( get_post_mime_type( $hosted_id ) ?: 'video/mp4
 			$media_size,
 			false,
 			array(
-				'class'         => 'arts-device-mockup__gallery-item',
-				'sizes'         => '100vw',
-				'loading'       => 'lazy',
-				'fetchpriority' => 'low',
-				'aria-hidden'   => 'true',
+				'class'                                 => 'arts-device-mockup__gallery-item',
+				'sizes'                                 => '100vw',
+				'loading'                               => 'lazy',
+				'fetchpriority'                         => 'low',
+				'aria-hidden'                           => 'true',
 				'data-arts-device-mockup-gallery-index' => (int) $index,
 			)
 		);

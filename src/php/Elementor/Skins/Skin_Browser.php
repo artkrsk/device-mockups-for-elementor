@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-use \Elementor\Controls_Manager;
+use Elementor\Controls_Manager;
 
 /**
  * Browser skin — renders a macOS-style browser window with a URL bar containing

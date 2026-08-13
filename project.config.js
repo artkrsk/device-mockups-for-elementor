@@ -2,11 +2,17 @@ import process from 'node:process'
 
 export default {
   slug: 'device-mockups-for-elementor',
-  entry: { ts: './src/ts/index.ts', sass: './src/styles/index.sass' },
+  versionConstant: 'ARTS_DEVICE_MOCKUPS_PLUGIN_VERSION',
+  defineKey: '__ARTS_DEVICE_MOCKUPS_VERSION__',
+  esbuildTarget: 'es2018',
+  entry: { ts: './src/ts/index.ts', sass: './src/styles/index.scss' },
+  bundles: [],
+  bannerLines: [],
+  zip: { budgetMb: 0.5 },
   paths: { php: './src/php', plugin: './src/wordpress-plugin', dist: './dist' },
   // Machine-specific: the Local site's plugin dir, from the gitignored .env (DEV_TARGET)
   devTarget: process.env.DEV_TARGET ?? null,
-  esbuildTarget: 'es2018',
-  versionConstant: 'ARTS_DEVICE_MOCKUPS_PLUGIN_VERSION',
-  vendor: { autoloaderOnly: true }
+  // null = derived from the slug (collision-proof across sibling plugins)
+  vendor: { autoloaderOnly: true, autoloaderSuffix: null },
+  blueprint: null
 }

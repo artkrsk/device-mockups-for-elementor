@@ -65,9 +65,18 @@ if ( $has_link ) {
 <a
 	href="<?php echo esc_url( $link_url ); ?>"
 	class="arts-device-mockup__link"
-	<?php if ( ! empty( $link['is_external'] ) ) : ?>target="_blank"<?php endif; ?>
-	<?php if ( ! empty( $link_rel ) ) : ?>rel="<?php echo esc_attr( implode( ' ', $link_rel ) ); ?>"<?php endif; ?>
-	<?php if ( '' !== $link_label ) : ?>aria-label="<?php echo esc_attr( $link_label ); ?>"<?php endif; ?>
+	<?php
+	if ( ! empty( $link['is_external'] ) ) :
+		?>
+		target="_blank"<?php endif; ?>
+	<?php
+	if ( ! empty( $link_rel ) ) :
+		?>
+		rel="<?php echo esc_attr( implode( ' ', $link_rel ) ); ?>"<?php endif; ?>
+	<?php
+	if ( '' !== $link_label ) :
+		?>
+		aria-label="<?php echo esc_attr( $link_label ); ?>"<?php endif; ?>
 >
 <?php endif; ?>
 <figure class="arts-device-mockup arts-device-mockup_tablet arts-device-mockup_tablet_<?php echo esc_attr( $orientation ); ?>" <?php echo $figure_data_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- values pre-escaped via esc_attr() ?>>
