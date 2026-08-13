@@ -54,8 +54,8 @@ abstract class BaseSkin extends \Elementor\Skin_Base {
 			'gallery_loop'        => 'yes' === Utilities::get_string_value( $settings['gallery_loop'] ?? 'yes' ),
 			'gallery_trigger'     => Utilities::get_string_value( $settings['gallery_trigger'] ?? 'hover' ),
 			'scroll_on_hover'     => 'yes' === Utilities::get_string_value( $settings['scroll_on_hover'] ?? '' ),
-			'orientation'         => Utilities::get_string_value( $this->get_instance_value( 'orientation' ) ?: 'landscape' ),
-			'caption_position'    => Utilities::get_string_value( $this->get_instance_value( 'caption_position' ) ?: 'url_bar' ),
+			'orientation'         => Utilities::get_string_value( $this->get_instance_value( 'orientation' ) ? $this->get_instance_value( 'orientation' ) : 'landscape' ),
+			'caption_position'    => Utilities::get_string_value( $this->get_instance_value( 'caption_position' ) ? $this->get_instance_value( 'caption_position' ) : 'url_bar' ),
 			'browser_url_text'    => Utilities::get_string_value( $this->get_instance_value( 'url_text' ) ),
 			'show_arrow'          => 'yes' === Utilities::get_string_value( $settings['show_arrow'] ?? '' ),
 		);

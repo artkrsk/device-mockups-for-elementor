@@ -42,7 +42,10 @@ if ( $hosted_id > 0 && '' === $hosted_url ) {
 	$hosted_url = (string) wp_get_attachment_url( $hosted_id );
 }
 
-$hosted_mime = $hosted_id > 0 ? ( get_post_mime_type( $hosted_id ) ?: 'video/mp4' ) : 'video/mp4';
+$hosted_mime = 'video/mp4';
+if ( $hosted_id > 0 && get_post_mime_type( $hosted_id ) ) {
+	$hosted_mime = get_post_mime_type( $hosted_id );
+}
 ?>
 <div class="arts-device-mockup__screen">
 	<?php if ( 'hosted' === $video_type && '' !== $hosted_url ) : ?>

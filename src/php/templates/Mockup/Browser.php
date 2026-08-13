@@ -3,8 +3,11 @@ use ArtsDeviceMockups\Arts\Utilities\Utilities;
 
 defined( 'ABSPATH' ) || exit;
 
-$args             = Utilities::parse_template_args( $args ?? array() );
-$widget_id        = Utilities::get_string_value( $args['widget_id'] ?? '' ) ?: wp_unique_id( 'arts-device-mockup-' );
+$args      = Utilities::parse_template_args( $args ?? array() );
+$widget_id = Utilities::get_string_value( $args['widget_id'] ?? '' );
+if ( '' === $widget_id ) {
+	$widget_id = wp_unique_id( 'arts-device-mockup-' );
+}
 $image_id         = Utilities::get_int_value( $args['image_id'] ?? 0 );
 $poster_id        = Utilities::get_int_value( $args['poster_id'] ?? 0 );
 $hosted_id        = Utilities::get_int_value( $args['video_hosted_id'] ?? 0 );
