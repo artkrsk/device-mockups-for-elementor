@@ -5,8 +5,10 @@ import { mockupManager } from './core/MockupManager'
 // Init the whole document on load — REGARDLESS of Elementor. Mockups can arrive outside the
 // per-widget Elementor handler below (theme template overrides, AJAX-injected markup), so gating
 // this on "Elementor absent" would leave them dead on any Elementor page. init() is idempotent
-// (already-tracked roots are skipped), so the handler re-attaching to an Elementor-widget
-// mockup is a harmless no-op.
+// (already-tracked roots are skipped), so the handler re-attaching creates nothing — and this
+// pass always wins that race, because elementorFrontend.init() itself runs after DOMContentLoaded.
+// A widget in the initial markup is therefore owned by THIS pass, and the handler's editMode opt
+// only reaches widgets Elementor re-renders afterwards.
 function initDocument(): void {
   mockupManager.init(document)
 }

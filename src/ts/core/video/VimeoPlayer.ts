@@ -5,7 +5,7 @@ import { createEmbedWrapper, elementorApiLoader } from './embed'
 let sdkLoading = false
 const readyCallbacks: Array<() => void> = []
 
-/** Standalone loader (package used without Elementor): inject the Player SDK once, fan out on load. */
+/** Standalone loader (plugin used without Elementor): inject the Player SDK once, fan out on load. */
 function ownLoader(cb: () => void): void {
   if (window.Vimeo) {
     cb()

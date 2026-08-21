@@ -153,7 +153,9 @@ abstract class BaseSkin extends \Elementor\Skin_Base {
 				return Utilities::get_string_value( wp_get_attachment_caption( $image_id ) );
 			case 'description':
 				// No core wrapper for the attachment Description — it's the attachment post's
-				// post_content; 'raw' avoids the_content filtering (the partial wp_kses_post's output).
+				// post_content; 'raw' runs no filters at all, where the default 'display' context would
+				// pass the value through the generic `post_content` filter (the partial wp_kses_post's
+				// output).
 				return Utilities::get_string_value( get_post_field( 'post_content', $image_id, 'raw' ) );
 			default:
 				return '';

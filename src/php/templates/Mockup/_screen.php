@@ -1,11 +1,11 @@
 <?php
 /**
  * Shared screen partial: renders `.arts-device-mockup__screen` with its media (image OR video) and the
- * hover-gallery items, all from attachment IDs via WP core functions (responsive srcset/sizes/lazy,
+ * rotating gallery items, all from attachment IDs via WP core functions (responsive srcset/sizes/lazy,
  * proper alt). Included by every skin partial so the media markup lives in one place.
  *
  * Expects the id-based $args contract: image_id, video_type, video_hosted_id, poster_id, video_hosted_url,
- * gallery_ids, media_size.
+ * gallery_ids, media_size, media_loading, media_fetchpriority.
  */
 
 use ArtsDeviceMockups\Arts\Utilities\Utilities;

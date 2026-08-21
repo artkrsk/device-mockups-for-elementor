@@ -5,7 +5,7 @@ import { createEmbedWrapper, elementorApiLoader } from './embed'
 let sdkLoading = false
 const readyCallbacks: Array<() => void> = []
 
-/** Standalone loader (package used without Elementor): inject the IFrame API once, fan out on ready. */
+/** Standalone loader (plugin used without Elementor): inject the IFrame API once, fan out on ready. */
 function ownLoader(cb: () => void): void {
   if (window.YT?.Player) {
     cb()

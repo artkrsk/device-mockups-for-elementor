@@ -7,6 +7,8 @@
 
 }
 
+// Ten states only. Neither the widget nor the rotator caps the gallery, so an active index ≥ 10
+// matches no rule here and the underlying media shows through instead of that item.
 @for $i from 0 through 9 {
   [data-arts-device-mockup-gallery-active="#{$i}"] .arts-device-mockup__gallery-item[data-arts-device-mockup-gallery-index="#{$i}"] {
     opacity: 1;
