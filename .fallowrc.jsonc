@@ -1,0 +1,26 @@
+{
+  // Codebase-health instrument (advisory in CI; knip is the hard gate).
+  // The stylesheet is named as an entry because nothing in the TS graph imports it — sass
+  // compiles it on its own (see project.config.js).
+  "entry": [
+    "src/ts/index.ts",
+    "project.config.js",
+    "dev/sync-fixtures.js",
+    "src/styles/index.scss"
+  ],
+  "ignorePatterns": ["dist/**", "vendor/**", "vendor-prefixed/**", "src/php/**"],
+  "ignoreExportsUsedInFile": true,
+  // Members invoked by something the static graph can't see.
+  "usedClassMembers": [
+    // Elementor handler lifecycle, called by elementorModules.frontend.handlers.Base.
+    { "extends": "ElementorBase", "members": ["onInit", "onDestroy"] },
+    // Interface dispatch from MockupInstance.syncVideo().
+    { "implements": "IVideoPlayer", "members": ["play", "pause"] },
+    // Every destroy() is a teardown entry point: the players' via IVideoPlayer, and
+    // MockupManager's on the window.artsDeviceMockups surface (index.ts) that AJAX consumers
+    // call. MockupManager has no heritage clause, so this one is a plain name.
+    "destroy"
+  ],
+  "duplicates": { "minOccurrences": 3 },
+  "health": { "ignore": ["**/*.test.ts"] }
+}

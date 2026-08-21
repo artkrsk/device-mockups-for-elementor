@@ -1,0 +1,21 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.5.3/schema.json",
+  "extends": ["@arts/wp-plugin-tooling/biome"],
+  "files": {
+    "includes": [
+      "src/ts/**",
+      "dev/**/*.js",
+      "project.config.js",
+      "vitest.config.ts",
+      "biome.json",
+      "knip.json",
+      ".fallowrc.jsonc"
+    ]
+  },
+  "overrides": [
+    {
+      "includes": ["src/ts/**"],
+      "linter": { "rules": { "suspicious": { "noExplicitAny": "off" } } }
+    }
+  ]
+}

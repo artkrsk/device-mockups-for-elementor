@@ -1,0 +1,107 @@
+{
+  "name": "arts/device-mockups-for-elementor",
+  "version": "1.0.0",
+  "description": "Device mockups as a native Elementor widget: browser, laptop, tablet, phone, and bare frames for images, videos, and rotating galleries.",
+  "license": "GPL-3.0-or-later",
+  "homepage": "https://artemsemkin.com",
+  "authors": [
+    {
+      "name": "Artem Semkin",
+      "email": "me@artemsemkin.com",
+      "homepage": "https://artemsemkin.com"
+    }
+  ],
+  "plugin": {
+    "Plugin Name": "Arts Device Mockups for Elementor",
+    "Description": "Device mockups as a native Elementor widget: browser, laptop, tablet, phone, and bare frames for images, videos, and rotating galleries.",
+    "Plugin URI": "https://artemsemkin.com/plugins/device-mockups-for-elementor/",
+    "License": "GPLv3",
+    "License URI": "https://www.gnu.org/licenses/gpl-3.0",
+    "Text Domain": "device-mockups-for-elementor"
+  },
+  "wordpress": {
+    "Requires at least": "6.0",
+    "Tested up to": "7.1",
+    "Requires PHP": "8.0"
+  },
+  "require": {
+    "php": ">=8.0",
+    "arts/base": "^1.1",
+    "arts/get-template-part": "^1.0",
+    "arts/utilities": "^2.5"
+  },
+  "autoload": {
+    "classmap": [
+      "vendor-prefixed/"
+    ],
+    "psr-4": {
+      "Arts\\DeviceMockups\\": "src/php/"
+    }
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "phpstan/extension-installer": true
+    }
+  },
+  "require-dev": {
+    "arts/elementor-stubs": "^4.0",
+    "brianhenryie/strauss": "^0.28",
+    "phpstan/phpstan": "^2.0",
+    "szepeviktor/phpstan-wordpress": "^2.0",
+    "arts/wp-plugin-standards": "^1.0"
+  },
+  "extra": {
+    "strauss": {
+      "target_directory": "vendor-prefixed",
+      "namespace_prefix": "ArtsDeviceMockups\\",
+      "classmap_prefix": "ArtsDeviceMockups_",
+      "constant_prefix": "ARTS_DEVICE_MOCKUPS_VENDOR_",
+      "classmap_output": true,
+      "include_modified_date": true,
+      "include_author": true,
+      "packages": [
+        "arts/base",
+        "arts/get-template-part",
+        "arts/utilities"
+      ],
+      "exclude_from_prefix": {
+        "packages": [
+          "arts/get-template-part"
+        ]
+      },
+      "update_call_sites": [
+        "src/php",
+        "src/wordpress-plugin"
+      ],
+      "delete_vendor_packages": false,
+      "exclude_from_copy": {
+        "file_patterns": [
+          "/^tests\\//",
+          "/phpcs\\.xml/",
+          "/phpstan/",
+          "/\\.github/",
+          "/\\.gitignore/",
+          "/composer\\.lock/"
+        ]
+      }
+    }
+  },
+  "scripts": {
+    "phpstan": "phpstan analyse --memory-limit=1G",
+    "prefix-namespaces": [
+      "@php vendor/bin/strauss",
+      "@composer dump-autoload"
+    ],
+    "pre-autoload-dump": [
+      "@php -r \"is_dir('vendor-prefixed') || mkdir('vendor-prefixed');\""
+    ],
+    "post-install-cmd": [
+      "@php -r \"if (file_exists('vendor/bin/strauss')) { passthru(PHP_BINARY . ' vendor/bin/strauss'); passthru('composer dump-autoload'); }\""
+    ],
+    "post-update-cmd": [
+      "@php -r \"if (file_exists('vendor/bin/strauss')) { passthru(PHP_BINARY . ' vendor/bin/strauss'); passthru('composer dump-autoload'); }\""
+    ]
+  }
+}

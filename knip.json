@@ -1,0 +1,7 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": ["src/ts/index.ts", "project.config.js", "dev/sync-fixtures.js"],
+  "project": ["src/ts/**/*.ts", "dev/**/*.js"],
+  "ignoreExportsUsedInFile": true,
+  "ignoreDependencies": ["fallow"]
+}

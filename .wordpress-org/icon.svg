@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-label="Arts Device Mockups for Elementor">
+  <title>Arts Device Mockups for Elementor</title>
+  <defs>
+    <linearGradient id="screen" x1="0" y1="256" x2="256" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1822CC"/>
+      <stop offset="1" stop-color="#1E2BFF"/>
+    </linearGradient>
+    <style>
+      /* One 8s loop, four holds: a single device frame morphs laptop - browser -
+         phone - tablet and back. Holds are keyframe PAIRS with identical values;
+         the morph happens between a pair's end and the next pair's start, so the
+         ease sits on the keyframe that CLOSES each hold. The whole morph is two
+         rects (frame + screen) driven by x/y/width/height/rx - no path
+         interpolation. Per-device details (camera, home pill, laptop base,
+         browser dots) only ride opacity, so they can never end up mid-morph.
+
+         Nothing in this stylesheet may contain a literal angle bracket or
+         ampersand: served as an image the file is parsed as XML, where style
+         contents are NOT raw text, so a bare bracket breaks the whole SVG -
+         silently, as a broken image.
+
+         The markup attributes double as the resting state: the laptop. The PNG
+         fallbacks are rendered from that same state. */
+      .frame, .screen, .cam, .home, .base, .dots {
+        animation-duration: 8s;
+        animation-iteration-count: infinite;
+        animation-fill-mode: both;
+      }
+      .base { transform-box: fill-box; transform-origin: center; }
+      .frame { animation-name: frame; }
+      .screen { animation-name: screen; }
+      .cam { animation-name: cam; }
+      .home { animation-name: home; }
+      .base { animation-name: base; }
+      .dots { animation-name: dots; }
+      @keyframes frame {
+        0%, 17%  { x: 40px; y: 62px; width: 176px; height: 122px; rx: 12px; animation-timing-function: cubic-bezier(.34,1.3,.64,1); }
+        25%, 42% { x: 36px; y: 60px; width: 184px; height: 136px; rx: 16px; animation-timing-function: cubic-bezier(.34,1.3,.64,1); }
+        50%, 67% { x: 90px; y: 53px; width: 76px;  height: 150px; rx: 18px; animation-timing-function: cubic-bezier(.34,1.3,.64,1); }
+        75%, 92% { x: 64px; y: 48px; width: 128px; height: 160px; rx: 18px; animation-timing-function: cubic-bezier(.34,1.3,.64,1); }
+        100%     { x: 40px; y: 62px; width: 176px; height: 122px; rx: 12px; }
+      }
+      @keyframes screen {
+        0%, 17%  { x: 48px; y: 70px; width: 160px; height: 106px; rx: 6px;  animation-timing-function: cubic-bezier(.34,1.3,.64,1); }
+        25%, 42% { x: 44px; y: 88px; width: 168px; height: 100px; rx: 8px;  animation-timing-function: cubic-bezier(.34,1.3,.64,1); }
+        50%, 67% { x: 96px; y: 59px; width: 64px;  height: 138px; rx: 12px; animation-timing-function: cubic-bezier(.34,1.3,.64,1); }
+        75%, 92% { x: 74px; y: 58px; width: 108px; height: 140px; rx: 10px; animation-timing-function: cubic-bezier(.34,1.3,.64,1); }
+        100%     { x: 48px; y: 70px; width: 160px; height: 106px; rx: 6px; }
+      }
+      @keyframes cam {
+        0%, 17%  { cy: 66px; r: 2px;   opacity: 1; animation-timing-function: cubic-bezier(.34,1.3,.64,1); }
+        25%, 42% { cy: 66px; r: 2px;   opacity: 0; animation-timing-function: cubic-bezier(.34,1.3,.64,1); }
+        50%, 67% { cy: 56px; r: 2px;   opacity: 1; animation-timing-function: cubic-bezier(.34,1.3,.64,1); }
+        75%, 92% { cy: 53px; r: 2.5px; opacity: 1; animation-timing-function: cubic-bezier(.34,1.3,.64,1); }
+        100%     { cy: 66px; r: 2px;   opacity: 1; }
+      }
+      @keyframes base {
+        0%, 17%   { transform: scaleX(1);  opacity: 1; animation-timing-function: cubic-bezier(.34,1.3,.64,1); }
+        25%, 92%  { transform: scaleX(.2); opacity: 0; animation-timing-function: cubic-bezier(.34,1.3,.64,1); }
+        100%      { transform: scaleX(1);  opacity: 1; }
+      }
+      @keyframes dots { 0%, 17% { opacity: 0; } 25%, 42% { opacity: 1; } 50%, 100% { opacity: 0; } }
+      @keyframes home { 0%, 42% { opacity: 0; } 50%, 67% { opacity: 1; } 75%, 100% { opacity: 0; } }
+    </style>
+  </defs>
+
+  <rect width="256" height="256" rx="54" fill="#F4F1F0"/>
+  <rect x="1" y="1" width="254" height="254" rx="53" fill="none" stroke="#5C5A52" stroke-opacity="0.28" stroke-width="2"/>
+
+  <rect class="base" x="24" y="184" width="208" height="10" rx="5" fill="#0B0B0B"/>
+  <rect class="frame" x="40" y="62" width="176" height="122" rx="12" fill="#0B0B0B"/>
+  <rect class="screen" x="48" y="70" width="160" height="106" rx="6" fill="url(#screen)"/>
+  <circle class="cam" cx="128" cy="66" r="2" fill="#F9F6F5" fill-opacity="0.6"/>
+  <rect class="home" x="114" y="187" width="28" height="4" rx="2" fill="#FFFFFF" fill-opacity="0.75" opacity="0"/>
+  <g class="dots" fill="#F9F6F5" fill-opacity="0.4" opacity="0"><circle cx="56" cy="74" r="3.5"/><circle cx="68" cy="74" r="3.5"/><circle cx="80" cy="74" r="3.5"/></g>
+</svg>

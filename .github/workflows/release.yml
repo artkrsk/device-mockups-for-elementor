@@ -1,0 +1,31 @@
+name: Release Plugin
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  release:
+    uses: artkrsk/wordpress-plugin-workflows/.github/workflows/release.yml@main
+    with:
+      node_version: '24'
+      php_version: '8.4'
+      build_command: 'composer install --prefer-dist --no-progress && pnpm build'
+      plugin_slug: 'device-mockups-for-elementor'
+      main_plugin_file: 'src/wordpress-plugin/device-mockups-for-elementor.php'
+      use_arts_changelog: true
+      assets_directory: '.wordpress-org'
+      version_files: '["plugin_header", "readme.txt", "package.json"]'
+      # wp.org approved the plugin 2026-08; SVN secrets are set.
+      deploy_to_wordpress: true
+      # Off unless the ALLOW_RETAG repo variable is 'true' — set it only for a deliberate
+      # re-deploy of an existing tag, then delete it (a stray re-run would rewrite wp.org history).
+      allow_retag: ${{ vars.ALLOW_RETAG == 'true' }}
+    secrets:
+      SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+      SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
