@@ -17,7 +17,11 @@ export class MockupHandler extends ElementorBase {
     const opts: IMockupConfig = {
       editMode: window.elementorFrontend?.isEditMode?.() ?? false
     }
-    this.instances = mockupManager.init(this.$element[0] as Element, opts)
+    const el = this.$element?.[0]
+    if (!el) {
+      return
+    }
+    this.instances = mockupManager.init(el, opts)
   }
 
   onDestroy(): void {
