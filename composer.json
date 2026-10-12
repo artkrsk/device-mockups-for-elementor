@@ -47,7 +47,7 @@
   },
   "require-dev": {
     "arts/elementor-stubs": "^4.0",
-    "brianhenryie/strauss": "^0.28",
+    "brianhenryie/strauss": "^0.31",
     "phpstan/phpstan": "^2.0",
     "szepeviktor/phpstan-wordpress": "^2.0",
     "arts/wp-plugin-standards": "^1.0"
