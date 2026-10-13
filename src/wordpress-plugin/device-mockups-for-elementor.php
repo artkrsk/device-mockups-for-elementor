@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Arts Device Mockups for Elementor
  * Description: Device mockups as a native Elementor widget: browser, laptop, tablet, phone, and bare frames for images, videos, and rotating galleries.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Artem Semkin
  * License: GPLv3
  * License URI: https://www.gnu.org/licenses/gpl-3.0
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ARTS_DEVICE_MOCKUPS_PLUGIN_VERSION', '1.0.0' );
+define( 'ARTS_DEVICE_MOCKUPS_PLUGIN_VERSION', '1.0.1' );
 
 require_once __DIR__ . '/vendor/autoload.php';
 // The production autoloader is regenerated without package `files` entries (root classmap only),
