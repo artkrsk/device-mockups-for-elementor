@@ -8,7 +8,7 @@ export class HostedPlayer implements IVideoPlayer {
   }
 
   play(): void {
-    // Browser autoplay restrictions silently reject play() before user interaction on mobile —
+    // The browser autoplay policy can reject play() (NotAllowedError) before any user interaction —
     // swallowing the rejection here is intentional; the video stays paused until unblocked.
     this.video.play().catch(() => {})
   }

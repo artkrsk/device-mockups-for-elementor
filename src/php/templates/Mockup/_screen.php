@@ -66,7 +66,8 @@ if ( $hosted_id > 0 && get_post_mime_type( $hosted_id ) ) {
 		</video>
 	<?php elseif ( in_array( $video_type, array( 'youtube', 'vimeo' ), true ) && $poster_id > 0 ) : ?>
 		<?php
-		// External video: the JS handler swaps in the player; the poster is the server-rendered frame.
+		// External video: the JS handler layers the player over the poster, which stays as the server-rendered
+		// frame and as the fallback if the embed fails.
 		echo wp_get_attachment_image( $poster_id, $media_size, false, $media_attrs );
 		?>
 	<?php elseif ( $image_id > 0 ) : ?>

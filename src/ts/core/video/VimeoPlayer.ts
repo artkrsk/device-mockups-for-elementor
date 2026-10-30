@@ -5,7 +5,7 @@ import { createEmbedWrapper, elementorApiLoader } from './embed'
 let sdkLoading = false
 const readyCallbacks: Array<() => void> = []
 
-/** Standalone loader (plugin used without Elementor): inject the Player SDK once, fan out on load. */
+/** Used when Elementor's shared loader is unavailable: inject the Player SDK once, fan out on load. */
 function ownLoader(cb: () => void): void {
   if (window.Vimeo) {
     cb()
@@ -76,8 +76,7 @@ export class VimeoPlayer implements IVideoPlayer {
           if (this.destroyed) {
             return
           }
-          // Vimeo rejects private / not-found / domain-restricted videos here and builds no iframe.
-          // Drop the empty wrapper so the server-rendered poster/image shows as the fallback.
+          // Drop the wrapper so the server-rendered poster/image shows as the fallback.
           console.warn(
             '[device-mockups-for-elementor] Vimeo video could not be embedded:',
             videoUrl,

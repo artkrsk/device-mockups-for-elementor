@@ -1,12 +1,13 @@
 // ── Custom property defaults (zero specificity via :where) ──
 // Declared ON `.arts-device-mockup` itself. Controls override by writing the same var on the SAME element
-// (selector `{{WRAPPER}} .arts-device-mockup`, not bare {{WRAPPER}}): a same-element (0,2,0) declaration
-// beats this (0,0,0) default, whereas an ancestor {{WRAPPER}} value would lose to this descendant
+// (selector `{{WRAPPER}} .arts-device-mockup`, not bare {{WRAPPER}}): a same-element declaration
+// beats this zero-specificity default, whereas an ancestor {{WRAPPER}} value would lose to this descendant
 // declaration (a direct declaration always outranks an inherited one). The one exception is
 // `--arts-device-mockup-description-spacing`: its consumer `.arts-device-mockup__description` is a SIBLING of
 // `.arts-device-mockup`, so its default is an inline var() fallback and its control stays on {{WRAPPER}}.
 // Colours are tokenised (themeable via Elementor controls). Geometry (cqw bezels / radii /
-// aspect-ratios) stays LITERAL per skin — measured 1:1 from the mockup-factory reference.
+// aspect-ratios) stays LITERAL per skin — taken from the mockup-factory reference where one exists
+// (phone has none; tablet portrait and the browser chrome deviate, see their sections).
 // No @layer: an Elementor widget's own structural CSS must beat Elementor's UNLAYERED element
 // resets (e.g. `.elementor img { height: auto }`), which a layered rule can never do regardless of
 // specificity. We rely on our `.arts-device-mockup__*` selectors, bumping the few rules that collide with
@@ -267,7 +268,7 @@
 // Unlike the laptop/tablet (physical devices whose bezels scale with
 // the device), the browser chrome is software UI — a real address bar is a roughly-constant height
 // regardless of window width. So the chrome is clamp()ed within sensible px bounds instead of pure
-// cqw, deriving its decorations (dots / spacer / pill floor) from one clamped --_bar-h — which now
+// cqw, deriving its decorations (dots / spacer / pill floor) from one clamped --_bar-h — which
 // acts only as the bar's MIN height, so the caption Typography font pushes the bar taller from there.
 // The figure is a plain container; the visible window is the __frame child (overflow-clipped),
 // so a "below frame" caption renders beneath it (inside the figure) without being clipped.
@@ -395,8 +396,7 @@
 }
 
 // Below-frame caption: the arrow sits inline after the text and keeps the default baseline alignment.
-// overflow:hidden synthesises the icon's baseline at its box bottom, so the cap-height arrow rests on
-// the text baseline — filling exactly the capital-letter band. Only the trailing gap is set here.
+// Only the trailing gap is set here.
 .arts-device-mockup__caption .arts-device-mockup__icon-blink {
   margin-inline-start: 0.4em;
 
@@ -468,8 +468,9 @@
 }
 
 // ── Scroll on hover ───────────────────────────────────────────────────────────
-// When enabled, the Y position is driven by the scroll (top → bottom on hover); the X slider still
-// applies. When disabled, the static object-position-x/y vars (above) are used.
+// When enabled, the Y position rests at the top and animates to the bottom (over the scroll-duration var)
+// while the screen is hovered; the X slider still applies. When disabled, the static
+// object-position-x/y vars (above) are used.
 .arts-device-mockup__media {
   transition: object-position var(--arts-device-mockup-scroll-duration) ease-in-out;
 

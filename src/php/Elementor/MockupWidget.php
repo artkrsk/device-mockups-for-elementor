@@ -25,9 +25,9 @@ use Elementor\Group_Control_Typography;
  */
 class MockupWidget extends \Elementor\Widget_Base {
 	/**
-	 * Remove the "Default" skin option from the editor picker. Elementor's register_skin_control()
-	 * prepends '' → 'Default' (invoking the base render() path) when this is true; render() here
-	 * is intentionally empty because all output goes through the active skin.
+	 * Set to false to drop the "Default" skin option from the editor picker: Elementor's register_skin_control()
+	 * prepends '' → 'Default' (invoking the widget's own render() path) when this is true. This widget does not
+	 * override render() because all output goes through the active skin.
 	 *
 	 * @var bool
 	 */
@@ -624,8 +624,8 @@ class MockupWidget extends \Elementor\Widget_Base {
 
 		$this->end_controls_section();
 
-		// Bare-only: the device/browser frame geometry is measured from the reference and fixed, so
-		// the only meaningful geometry control is the frameless card's corner radius.
+		// Bare-only: the device/browser frame geometry is fixed per skin (literal cqw values in
+		// _mockup.scss), so the only meaningful geometry control is the frameless card's corner radius.
 		$this->start_controls_section(
 			'section_geometry',
 			array(

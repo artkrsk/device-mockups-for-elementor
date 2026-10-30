@@ -12,7 +12,7 @@ use Elementor\Controls_Manager;
  * Tablet skin — renders a tablet device frame. Adds an orientation control
  * (landscape / portrait) that adds a modifier class and adjusts the aspect ratio.
  * Control id is `orientation`; Skin_Base auto-prefixes it to `tablet_orientation`.
- * Read in render via get_instance_value('orientation').
+ * Read by BaseSkin::build_args() via get_instance_value('orientation').
  */
 class Skin_Tablet extends BaseSkin {
 

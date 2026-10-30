@@ -3,9 +3,9 @@
 Standalone wp.org plugin: device mockups (browser, laptop, tablet, phone, bare frames) as a native
 Elementor **widget** with skins, rendering image/video/gallery screens. Extraction of
 `arts-store-mockups` (ArtsStore monorepo, `/Users/art/Projects/ArtsStore/packages/arts-store-mockups`)
-— the donor stays in the shop; this repo lives its own life. The build/tooling chassis is the
-vendored reference from `repeater-tags-for-elementor-acf` (see that repo's CLAUDE.md for the
-full build/meta/CI documentation — identical system, different slug). Project state that
+— the donor stays in the shop; this repo lives its own life. Build, meta-stamping, changelog and
+release mechanics come from `arts-wp` (`@arts/wp-plugin-tooling`), shared across the Arts plugins
+— the parent `../CLAUDE.md` covers the cross-plugin conventions. Project state that
 changes over time lives in the auto-memory, not in this file.
 
 ## Stack & requirements
@@ -15,7 +15,8 @@ Elementor registration (deliberate: `arts/elementor-extension` was evaluated and
 its extras are theme-ecosystem features, and the donor package itself hand-rolls; keep the
 donor's registration pattern). `Requires Plugins: elementor` header (hand-maintained; the meta
 stamper skips this field by name); no runtime Elementor guard — everything but asset
-*registration* hangs off `elementor/*` hooks, and registering handles nothing enqueues is inert.
+*registration* and the WPML compat filter hangs off `elementor/*` hooks, and registering handles
+nothing enqueues is inert.
 
 ## Commands
 
@@ -25,40 +26,58 @@ exists only as a composer script.
 
 ```bash
 pnpm dev:plugin   # stamp meta, then watch: esbuild TS + sass → src/php/libraries/…, mirror → Local site
-pnpm build        # production ZIP in dist/
-pnpm test         # vitest (passWithNoTests until the first test lands)
-pnpm release      # version bump + changelog + tag
+pnpm build        # production ZIP in dist/; when DEV_TARGET is set, also replaces its contents with the build
+pnpm test         # vitest, specs in tests/**/*.test.ts
+pnpm release      # bump, stamp, date changelog, commit + tag; needs a clean tree, push is manual
 
 pnpm exec tsc --noEmit                        # typecheck — esbuild does NOT type-check
-pnpm exec biome check                         # src/ts, dev/, project.config.js (config in biome.json)
+pnpm exec biome check                         # scope in biome.json; CI runs `biome ci .`
 pnpm exec stylelint 'src/styles/**/*.scss'
+pnpm exec knip                                # unused exports/deps — CI hard gate, not in lefthook
 vendor/bin/phpstan analyse --memory-limit=1G  # level max (composer install first)
 vendor/bin/phpcs                              # ArtsFramework ruleset over src/php
-node dev/sync-fixtures.js                     # push dev/mu-plugins fixtures to the Local site
+node dev/sync-fixtures.js                     # push dev/mu-plugins to the Local site; needs DEV_TARGET exported in the shell, .env alone fails
 ```
 
-`lefthook` wires the fast ones into pre-commit (biome / stylelint / phpcbf --write, then tsc)
+`lefthook` wires the fast ones into pre-commit (auto-fixing biome / stylelint / phpcbf, then tsc)
 and the slow ones into pre-push (vitest, phpstan, phpcs). Hooks are advisory — `LEFTHOOK=0`
 skips them; CI is the authoritative gate.
 
-Fresh clone: `composer install`, create `.env` with `DEV_TARGET=<Local site plugin dir>`, then
-`pnpm dev:plugin`. Strauss copies the `arts/*` packages into `vendor-prefixed/` under
-`ArtsDeviceMockups\` via the composer post-install/post-update hooks — except
-`arts/get-template-part`, which is `exclude_from_prefix`'d because it ships a global function.
-The main plugin file `require_once`s that file explicitly for a separate reason: the production
-`vendor/` autoloader carries no package `files` entries, so nothing else would load the global.
+Fresh clone: `pnpm install` + `composer install`, create `.env` with
+`DEV_TARGET=<Local site plugin dir>`, then `pnpm dev:plugin`. Strauss copies the `arts/*`
+packages into `vendor-prefixed/` under `ArtsDeviceMockups\` via the composer
+post-install/post-update hooks — except `arts/get-template-part`, which is `exclude_from_prefix`'d
+because it ships a global function. The main plugin file `require_once`s that file explicitly for
+a separate reason: the production `vendor/` ships autoloader-only (no package `files` entries), so
+nothing else would load the global.
 ONE config file (`project.config.js`, unknown keys are hard errors); machine-specific
 `DEV_TARGET` lives in the gitignored `.env`; `pnpm build` needs no `.env` (CI-safe). Production
-compiles into a staging dir under `dist/` and never writes the source tree.
+compiles into a staging dir under `dist/` and never writes compiled output into the source tree.
 
-Dev site: `/Users/art/Local Sites/fluid-ds/app/public` (shared with other Arts plugins — no
-overlap). wp-cli against it (Local ships its own PHP/MySQL/wp-cli per site — source the env
-first, one invocation, and stay in the site dir wp-cli lands in):
+Dev site: the shared `plugin-dev` Local site (`/Users/art/Local Sites/fluid-ds`, other Arts plugins
+live there too — no overlap). wp-cli: `wp-local plugin-dev <wp args>` (Local's own PHP/MySQL; bare
+Homebrew `wp` hits the wrong socket).
 
-```bash
-source <(grep -E '^[[:space:]]*(export|cd|unset)' "/Users/art/Library/Application Support/Local/ssh-entry/wNlVYAQFQ.sh")
-wp plugin list
-```
+## Layout
+
+One unit, no nested CLAUDE.md. Flow: a skin builds `$args` and renders a template partial, the
+partial emits `data-arts-device-mockup*` markup, the TS initializes whatever carries those attrs.
+
+- `src/wordpress-plugin/` — main plugin file and `readme.txt` (changelog source; the root
+  `CHANGELOG.md` is generated from it).
+- `.wordpress-org/` — wp.org listing assets (icons, banners, screenshots), deployed by the release
+  workflow.
+- `src/php/` — `Plugin.php` hooks the `Managers/` (Elementor registration, asset handles); `Base/`
+  is a thin layer over the prefixed `arts/base`; `Compat/WPML.php`.
+- `src/php/Elementor/` — `MockupWidget` (controls, skin registration) and `Skins/` (one per device;
+  `BaseSkin` maps settings to the partial's `$args`).
+- `src/php/templates/Mockup/` — one partial per skin plus shared `_screen.php`; themes override
+  via `{theme}/device-mockups/`.
+- `src/ts/` — `index.ts` entry (document pass, Elementor handler attach, `window.artsDeviceMockups`);
+  `core/` holds the manager/instance, gallery rotator and `video/` players.
+- `src/styles/` — SCSS compiled into the single CSS handle.
+- `src/php/libraries/`, `dist/`, `vendor-prefixed/` — generated, gitignored; don't edit.
+- `dev/` — `sync-fixtures.js` copies `dev/mu-plugins/` into the Local site's `mu-plugins`.
 
 ## Research routing — do this BEFORE implementing against a third party
 
@@ -81,7 +100,8 @@ real source. Route via the Task/Agent tool:
 ## Frozen identifiers (public surface — changing any of these breaks saved pages)
 
 - Widget name `arts-device-mockup` · editor category `arts-widgets` · skin ids `bare`,
-  `laptop`, `tablet`, `browser`, `phone`.
+  `laptop`, `tablet`, `browser`, `phone`. The skin list is repeated in the TS
+  (`core/constants/MOCKUP_SKINS.ts`, one handler attach per skin) — change both together.
 - One CSS + one JS handle, both `arts-device-mockups`, declared via the widget's
   `get_style_depends()` / `get_script_depends()`.
 - PHP ↔ JS contract is data attributes only, never settings: the partials emit
@@ -91,10 +111,10 @@ real source. Route via the Task/Agent tool:
 
 ## Gotchas
 
-- Elementor's V4 "atomic widgets" React editor is experimental — do NOT build against it.
+- Do NOT build against Elementor's V4 "atomic widgets" editor; this plugin is a classic `Widget_Base` + skins widget.
 - **Writing `_elementor_data` raw via wp-cli leaves `_elementor_element_cache` stale** — the
-  frontend serves old markup until you `delete_post_meta(…, '_elementor_element_cache')`
-  (editor saves invalidate it automatically; only raw meta writes hit this).
+  frontend serves old markup until you `delete_post_meta(…, '_elementor_element_cache')` or the
+  cache TTL lapses (editor saves invalidate it automatically).
 - **`elementorFrontend.init()` runs AFTER `DOMContentLoaded`** — jQuery 3 dispatches ready
   callbacks through a Deferred (`setTimeout`), and in the editor preview Elementor inits off the
   iframe's `load`. So the document-wide pass in `index.ts` always goes first: `elementorFrontend`
@@ -102,8 +122,8 @@ real source. Route via the Task/Agent tool:
   the handler's `editMode` opt only lands on markup Elementor re-renders.
 - A skin that registers its own controls MUST re-target the shared skin object at the widget
   instance the `after_section_end` action hands it (`set_parent( $widget )`) before opening a
-  section. Skipping it re-triggers the `_skin` control injection — "Cannot redeclare control
-  _skin". Skins with no extra controls don't need it.
+  section. Skipping it re-triggers the `_skin` control injection (a `_doing_it_wrong` notice:
+  `Cannot redeclare control with same name "_skin".`). Skins with no extra controls don't need it.
 
 ## Conventions
 
@@ -115,9 +135,7 @@ real source. Route via the Task/Agent tool:
   `arts_device_mockups_*` / `ARTS_DEVICE_MOCKUPS_*` · text domain `device-mockups-for-elementor`.
 - `composer.json` is the source of truth for plugin meta AND the version — the `version` field
   is stamped into the header, readme Stable tag, PHP define, package.json and banners by
-  `arts-wp` (from `@arts/wp-plugin-tooling`, where build/release/changelog mechanics live).
-  Edit composer.json, never the stamped fields directly.
-- `vendor/` ships autoloader-only in production; packages live prefixed in `vendor-prefixed/`.
+  `arts-wp`. Edit composer.json, never the stamped fields directly.
 - Tests are logic-only — no UI/markup/rendering tests.
 - Runtime deps are `arts/base`, `arts/utilities`, `arts/get-template-part`. The donor's
   shop-coupled `arts/store-shared` and `arts/store-ui` deliberately did not come along; if a

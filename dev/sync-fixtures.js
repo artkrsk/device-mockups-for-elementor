@@ -3,8 +3,9 @@
  * from the same build config the plugin sync uses (devTarget), so there is
  * exactly one place that knows where the Local site lives.
  */
-// Load the gitignored .env (DEV_TARGET) — self-contained since the build
-// runner moved into @arts/wp-plugin-tooling.
+// Populate process.env from the gitignored .env. Static imports are hoisted above this call, so
+// project.config.js has already read DEV_TARGET by now: .env alone does not reach config.devTarget,
+// the variable must also be exported in the shell.
 try {
   process.loadEnvFile()
 } catch {
