@@ -12,7 +12,6 @@
  * Text Domain: device-mockups-for-elementor
  * Plugin URI: https://artemsemkin.com/plugins/device-mockups-for-elementor/
  * Author URI: https://artemsemkin.com
- * Tested up to: 7.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
