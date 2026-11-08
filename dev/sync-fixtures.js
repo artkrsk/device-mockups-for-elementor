@@ -3,19 +3,19 @@
  * from the same build config the plugin sync uses (devTarget), so there is
  * exactly one place that knows where the Local site lives.
  */
-// Populate process.env from the gitignored .env. Static imports are hoisted above this call, so
-// project.config.js has already read DEV_TARGET by now: .env alone does not reach config.devTarget,
-// the variable must also be exported in the shell.
+import { cp, mkdir } from 'node:fs/promises'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+// Populate process.env from the gitignored .env before project.config.js reads DEV_TARGET —
+// hence the dynamic import below: a static one would be hoisted above this call.
 try {
   process.loadEnvFile()
 } catch {
   // No .env — fine; the guard below reports the missing DEV_TARGET.
 }
 
-import { cp, mkdir } from 'node:fs/promises'
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
-import config from '../project.config.js'
+const { default: config } = await import('../project.config.js')
 
 const devDir = path.dirname(fileURLToPath(import.meta.url))
 const pluginTarget = config.devTarget

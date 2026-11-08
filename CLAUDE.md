@@ -36,7 +36,7 @@ pnpm exec stylelint 'src/styles/**/*.scss'
 pnpm exec knip                                # unused exports/deps — CI hard gate, not in lefthook
 vendor/bin/phpstan analyse --memory-limit=1G  # level max (composer install first)
 vendor/bin/phpcs                              # ArtsFramework ruleset over src/php
-node dev/sync-fixtures.js                     # push dev/mu-plugins to the Local site; needs DEV_TARGET exported in the shell, .env alone fails
+node dev/sync-fixtures.js                     # push dev/mu-plugins to the Local site; reads DEV_TARGET from .env
 ```
 
 `lefthook` wires the fast ones into pre-commit (auto-fixing biome / stylelint / phpcbf, then tsc)
