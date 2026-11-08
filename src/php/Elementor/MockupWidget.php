@@ -141,16 +141,15 @@ class MockupWidget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'video_type',
 			array(
-				'label'              => esc_html__( 'Video type', 'device-mockups-for-elementor' ),
-				'type'               => Controls_Manager::SELECT,
-				'options'            => array(
+				'label'   => esc_html__( 'Video type', 'device-mockups-for-elementor' ),
+				'type'    => Controls_Manager::SELECT,
+				'options' => array(
 					'none'    => esc_html__( 'None', 'device-mockups-for-elementor' ),
 					'hosted'  => esc_html__( 'Self-hosted', 'device-mockups-for-elementor' ),
 					'youtube' => 'YouTube',
 					'vimeo'   => 'Vimeo',
 				),
-				'default'            => 'none',
-				'frontend_available' => true,
+				'default' => 'none',
 			)
 		);
 
@@ -329,10 +328,9 @@ class MockupWidget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'video_play_on_hover',
 			array(
-				'label'              => esc_html__( 'Play video on hover only', 'device-mockups-for-elementor' ),
-				'type'               => Controls_Manager::SWITCHER,
-				'condition'          => array( 'video_type!' => 'none' ),
-				'frontend_available' => true,
+				'label'     => esc_html__( 'Play video on hover only', 'device-mockups-for-elementor' ),
+				'type'      => Controls_Manager::SWITCHER,
+				'condition' => array( 'video_type!' => 'none' ),
 			)
 		);
 
@@ -374,9 +372,9 @@ class MockupWidget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'gallery_trigger',
 			array(
-				'label'              => esc_html__( 'Gallery trigger', 'device-mockups-for-elementor' ),
-				'type'               => Controls_Manager::CHOOSE,
-				'options'            => array(
+				'label'   => esc_html__( 'Gallery trigger', 'device-mockups-for-elementor' ),
+				'type'    => Controls_Manager::CHOOSE,
+				'options' => array(
 					'hover' => array(
 						'title' => esc_html__( 'Hover', 'device-mockups-for-elementor' ),
 						'icon'  => 'eicon-cursor-move',
@@ -386,8 +384,7 @@ class MockupWidget extends \Elementor\Widget_Base {
 						'icon'  => 'eicon-play',
 					),
 				),
-				'default'            => 'hover',
-				'frontend_available' => true,
+				'default' => 'hover',
 			)
 		);
 
@@ -404,9 +401,8 @@ class MockupWidget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'scroll_on_hover',
 			array(
-				'label'              => esc_html__( 'Scroll on hover', 'device-mockups-for-elementor' ),
-				'type'               => Controls_Manager::SWITCHER,
-				'frontend_available' => true,
+				'label' => esc_html__( 'Scroll on hover', 'device-mockups-for-elementor' ),
+				'type'  => Controls_Manager::SWITCHER,
 			)
 		);
 
