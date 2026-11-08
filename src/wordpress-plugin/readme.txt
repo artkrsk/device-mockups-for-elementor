@@ -5,7 +5,7 @@ Tags: elementor, mockup, device mockup, browser mockup, phone mockup
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 8.0
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0
 GitHub Plugin URI: https://github.com/artkrsk/device-mockups-for-elementor/
@@ -79,7 +79,7 @@ In the Elementor editor, look for "Device Mockup" under the "Arts" category.
 
 == Changelog ==
 
-= 1.0.2 =
+= 1.0.2 – November 8, 2026 =
 * fixed: Mockups re-rendered by Elementor keep working when another plugin or an optimizer changes the script loading order.
 
 = 1.0.1 – October 13, 2026 =
