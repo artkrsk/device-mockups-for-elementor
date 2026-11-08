@@ -1,6 +1,7 @@
 import { MOCKUP_SKINS } from './core/constants/MOCKUP_SKINS'
-import { MockupHandler } from './core/MockupHandler'
+import { createMockupHandler } from './core/MockupHandler'
 import { mockupManager } from './core/MockupManager'
+import type { TElementorBaseConstructor } from './core/types/TElementorBaseConstructor'
 
 // Init the whole document on load — REGARDLESS of Elementor. Mockups can arrive outside the
 // per-widget Elementor handler below (theme template overrides, AJAX-injected markup), so gating
@@ -20,6 +21,11 @@ if (document.readyState === 'loading') {
 
 // Elementor frontend + editor preview: attach per skin (editMode opts + lifecycle for widget mockups)
 window.addEventListener('elementor/frontend/init', () => {
+  const Base = window.elementorModules?.frontend?.handlers?.Base
+  if (!Base) {
+    return
+  }
+  const MockupHandler = createMockupHandler(Base as unknown as TElementorBaseConstructor)
   MOCKUP_SKINS.forEach((skin) => {
     window.elementorFrontend?.elementsHandler.attachHandler(
       'arts-device-mockup',
