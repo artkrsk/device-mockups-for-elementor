@@ -67,7 +67,7 @@ partial emits `data-arts-device-mockup*` markup, the TS initializes whatever car
   `CHANGELOG.md` is generated from it).
 - `.wordpress-org/` — wp.org listing assets (icons, banners, screenshots), deployed by the release
   workflow.
-- `src/php/` — `Plugin.php` hooks the `Managers/` (Elementor registration, asset handles); `Base/`
+- `src/php/` — `Plugin.php` hooks the `Managers/` (Elementor registration, asset handles) and registers the Elementor cache clear (arts/base `CacheClear::on_version()`); `Base/`
   is a thin layer over the prefixed `arts/base`; `Compat/WPML.php`.
 - `src/php/Elementor/` — `MockupWidget` (controls, skin registration) and `Skins/` (one per device;
   `BaseSkin` maps settings to the partial's `$args`).

@@ -2,6 +2,8 @@
 
 namespace Arts\DeviceMockups;
 
+use ArtsDeviceMockups\Arts\Base\Elementor\CacheClear;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -58,6 +60,8 @@ final class Plugin extends Base\Plugin {
 
 		add_action( 'elementor/elements/categories_registered', array( $this->managers->elementor, 'register_category' ) );
 		add_action( 'elementor/widgets/register', array( $this->managers->elementor, 'register_widget' ) );
+
+		CacheClear::on_version( 'device-mockups', ARTS_DEVICE_MOCKUPS_PLUGIN_VERSION );
 
 		add_filter( 'wpml_elementor_widgets_to_translate', array( new Compat\WPML(), 'register' ) );
 	}
