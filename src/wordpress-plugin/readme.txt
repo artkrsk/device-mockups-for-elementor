@@ -3,9 +3,9 @@ Contributors: artemsemkin
 Donate link: https://buymeacoffee.com/artemsemkin
 Tags: elementor, mockup, device mockup, browser mockup, phone mockup
 Requires at least: 6.0
-Tested up to: 7.1
+Tested up to: 7.2
 Requires PHP: 8.0
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0
 GitHub Plugin URI: https://github.com/artkrsk/device-mockups-for-elementor/
@@ -79,7 +79,7 @@ In the Elementor editor, look for "Device Mockup" under the "Arts" category.
 
 == Changelog ==
 
-= 1.0.3 =
+= 1.0.3 – November 24, 2026 =
 * improved: confirmed compatibility with WordPress 7.2.
 * fixed: Existing pages show the latest mockup look right after a plugin update, without clearing Elementor's cache by hand.
 

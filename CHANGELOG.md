@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.3 – November 24, 2026
+
+* improved: confirmed compatibility with WordPress 7.2.
+* fixed: Existing pages show the latest mockup look right after a plugin update, without clearing Elementor's cache by hand.
+
 ## 1.0.2 – November 8, 2026
 
 * fixed: Mockups re-rendered by Elementor keep working when another plugin or an optimizer changes the script loading order.
