@@ -108,6 +108,14 @@ real source. Route via the Task/Agent tool:
   `data-arts-device-mockup*` and the frontend TS reads nothing else.
 - `window.artsDeviceMockups` is the manager surface AJAX consumers call.
 - Constants `ARTS_DEVICE_MOCKUPS_PLUGIN_VERSION` and `ARTS_DEVICE_MOCKUPS_TEMPLATES_DIR`.
+- Template functions `arts_device_mockups_render( $skin, $args )` and `arts_device_mockups_get()`
+  (`src/php/arts-device-mockups-render.php`, required by the main plugin file), and with them
+  the partials' `$args` keys. PHP callers outside the widget render through these (the
+  ArtsStore storefront does), and style the classes `arts-device-mockup`, `__link`, `__screen`.
+- Hover overlay: `$args` keys `overlay_label` / `overlay_icon` (pre-rendered icon markup) ·
+  control ids `overlay_label`, `overlay_icon`, `overlay_bg`, `overlay_color`,
+  `overlay_label_typography` · variables `--arts-device-mockup-overlay-bg` / `-overlay-color` ·
+  classes `__overlay`, `__overlay-icon`, `__overlay-label`.
 
 ## Gotchas
 

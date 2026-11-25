@@ -5,7 +5,7 @@
  * proper alt). Included by every skin partial so the media markup lives in one place.
  *
  * Expects the id-based $args contract: image_id, video_type, video_hosted_id, poster_id, video_hosted_url,
- * gallery_ids, media_size, media_loading, media_fetchpriority.
+ * gallery_ids, media_size, media_loading, media_fetchpriority, overlay_label, overlay_icon.
  */
 
 use ArtsDeviceMockups\Arts\Utilities\Utilities;
@@ -20,6 +20,9 @@ $poster_id   = Utilities::get_int_value( $args['poster_id'] ?? 0 );
 $hosted_id   = Utilities::get_int_value( $args['video_hosted_id'] ?? 0 );
 $hosted_url  = Utilities::get_string_value( $args['video_hosted_url'] ?? '' );
 $gallery_ids = Utilities::get_array_value( $args['gallery_ids'] ?? array() );
+// Hover overlay: a plain-text label and pre-rendered icon markup (an <svg> or an <i>), both optional.
+$overlay_label = Utilities::get_string_value( $args['overlay_label'] ?? '' );
+$overlay_icon  = Utilities::get_string_value( $args['overlay_icon'] ?? '' );
 
 // Loading hints for the MAIN media image only (gallery items are always lazy/low). Without an explicit
 // value WP core's loading-optimization heuristic omits loading=lazy for the first few images it renders
@@ -90,4 +93,14 @@ if ( $hosted_id > 0 && get_post_mime_type( $hosted_id ) ) {
 		);
 		?>
 	<?php endforeach; ?>
+	<?php if ( '' !== $overlay_icon || '' !== $overlay_label ) : ?>
+	<div class="arts-device-mockup__overlay">
+		<?php if ( '' !== $overlay_icon ) : ?>
+		<span class="arts-device-mockup__overlay-icon"><?php echo wp_kses( $overlay_icon, arts_device_mockups_icon_allowed_html() ); ?></span>
+		<?php endif; ?>
+		<?php if ( '' !== $overlay_label ) : ?>
+		<span class="arts-device-mockup__overlay-label"><?php echo esc_html( $overlay_label ); ?></span>
+		<?php endif; ?>
+	</div>
+	<?php endif; ?>
 </div>
