@@ -79,6 +79,10 @@ In the Elementor editor, look for "Device Mockup" under the "Arts" category.
 
 == Changelog ==
 
+= 1.1.0 =
+* added: A linked mockup can show a label and an icon over its screen when hovered, with style controls for the background, colors and label typography.
+* added: Themes and other plugins can render a mockup from PHP with arts_device_mockups_render() or get its markup with arts_device_mockups_get().
+
 = 1.0.3 – November 24, 2026 =
 * improved: confirmed compatibility with WordPress 7.2.
 * fixed: Existing pages show the latest mockup look right after a plugin update, without clearing Elementor's cache by hand.
