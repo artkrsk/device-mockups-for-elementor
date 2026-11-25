@@ -33,6 +33,8 @@ abstract class BaseSkin extends \Elementor\Skin_Base {
 		$youtube      = Utilities::get_string_value( $settings['video_youtube_url'] ?? '' );
 		$vimeo        = Utilities::get_string_value( $settings['video_vimeo_url'] ?? '' );
 		$link         = Utilities::get_array_value( $settings['link'] ?? array() );
+		// The overlay is a hover affordance on the link, so an unlinked mockup never carries one.
+		$has_link = '' !== Utilities::get_string_value( $link['url'] ?? '' );
 
 		return array(
 			'widget_id'           => $this->parent ? $this->parent->get_id() : '',
@@ -62,7 +64,24 @@ abstract class BaseSkin extends \Elementor\Skin_Base {
 			'caption_position'    => Utilities::get_string_value( $this->get_instance_value( 'caption_position' ) ? $this->get_instance_value( 'caption_position' ) : 'url_bar' ),
 			'browser_url_text'    => Utilities::get_string_value( $this->get_instance_value( 'url_text' ) ),
 			'show_arrow'          => 'yes' === Utilities::get_string_value( $settings['show_arrow'] ?? '' ),
+			'overlay_label'       => $has_link ? Utilities::get_string_value( $settings['overlay_label'] ?? '' ) : '',
+			'overlay_icon'        => $has_link ? $this->get_overlay_icon_html( $settings ) : '',
 		);
+	}
+
+	/**
+	 * Render the overlay icon setting to markup, so the partial stays free of Elementor.
+	 *
+	 * @param array<int|string, mixed> $settings As returned by Utilities::get_array_value().
+	 * @return string
+	 */
+	private function get_overlay_icon_html( array $settings ): string {
+		// Icons_Manager::try_get_icon_html() only exists from Elementor 3.10; render_icon() echoes
+		// on every supported version and prints nothing for an empty value.
+		ob_start();
+		\Elementor\Icons_Manager::render_icon( Utilities::get_array_value( $settings['overlay_icon'] ?? array() ), array( 'aria-hidden' => 'true' ) );
+
+		return (string) ob_get_clean();
 	}
 
 	/**

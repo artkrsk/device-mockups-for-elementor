@@ -291,6 +291,27 @@ class MockupWidget extends \Elementor\Widget_Base {
 			)
 		);
 
+		$this->add_control(
+			'overlay_label',
+			array(
+				'label'       => esc_html__( 'Hover label', 'device-mockups-for-elementor' ),
+				'description' => esc_html__( 'Shown over the screen while the linked mockup is hovered.', 'device-mockups-for-elementor' ),
+				'type'        => Controls_Manager::TEXT,
+				'dynamic'     => array( 'active' => true ),
+				'separator'   => 'before',
+				'condition'   => array( 'link[url]!' => '' ),
+			)
+		);
+
+		$this->add_control(
+			'overlay_icon',
+			array(
+				'label'     => esc_html__( 'Hover icon', 'device-mockups-for-elementor' ),
+				'type'      => Controls_Manager::ICONS,
+				'condition' => array( 'link[url]!' => '' ),
+			)
+		);
+
 		$this->end_controls_section();
 
 		$this->start_controls_section(
@@ -617,6 +638,47 @@ class MockupWidget extends \Elementor\Widget_Base {
 
 			$this->add_control( $id, $control_args );
 		}
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'section_overlay',
+			array(
+				'label'     => esc_html__( 'Hover Overlay', 'device-mockups-for-elementor' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
+				'condition' => array( 'link[url]!' => '' ),
+			)
+		);
+
+		$this->add_control(
+			'overlay_bg',
+			array(
+				'label'     => esc_html__( 'Background', 'device-mockups-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .arts-device-mockup' => '--arts-device-mockup-overlay-bg: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'overlay_color',
+			array(
+				'label'     => esc_html__( 'Icon & label color', 'device-mockups-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => array(
+					'{{WRAPPER}} .arts-device-mockup' => '--arts-device-mockup-overlay-color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			array(
+				'name'     => 'overlay_label_typography',
+				'selector' => '{{WRAPPER}} .arts-device-mockup__overlay-label',
+			)
+		);
 
 		$this->end_controls_section();
 

@@ -31,6 +31,11 @@ class WPML {
 					'type'        => esc_html__( 'Mockup: URL text', 'device-mockups-for-elementor' ),
 					'editor_type' => 'LINE',
 				),
+				array(
+					'field'       => 'overlay_label',
+					'type'        => esc_html__( 'Mockup: Hover label', 'device-mockups-for-elementor' ),
+					'editor_type' => 'LINE',
+				),
 			),
 		);
 		return $widgets;

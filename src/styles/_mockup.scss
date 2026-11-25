@@ -26,6 +26,8 @@
   --arts-device-mockup-url-color: #8A867D;
   --arts-device-mockup-camera-color: rgb(var(--arts-device-mockup-tint) / 40%);
   --arts-device-mockup-caption-hover-color: rgb(var(--arts-device-mockup-tint) / 82%);
+  --arts-device-mockup-overlay-bg: rgb(0 0 0 / 58%);
+  --arts-device-mockup-overlay-color: rgb(var(--arts-device-mockup-tint) / 90%);
   --arts-device-mockup-object-fit: cover;
   --arts-device-mockup-object-position-x: 50%;
   --arts-device-mockup-object-position-y: 50%;
@@ -465,6 +467,80 @@
     transition: none;
 
   }
+}
+
+// ── Hover overlay ─────────────────────────────────────────────────────────────
+// Rendered by _screen.php when $args carry overlay_icon / overlay_label. The link wraps the whole
+// <figure> in every skin, so its :hover reaches the overlay; pointer-events:none leaves the link
+// its clicks. z-index 2 keeps the overlay above an active gallery item (z-index 1) and above a
+// video embed the script appends after it.
+.arts-device-mockup__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5cqw;
+  background: rgb(0 0 0 / 0%);
+  color: var(--arts-device-mockup-overlay-color);
+  transition: background 0.3s ease;
+  pointer-events: none;
+
+}
+
+.arts-device-mockup__overlay-icon,
+.arts-device-mockup__overlay-label {
+  opacity: 0;
+  transform: translateY(0.5cqw);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+
+}
+
+.arts-device-mockup__overlay-label {
+  transition-delay: 0.04s;
+
+}
+
+// The icon markup is an <svg> or a font <i>: the wrapper owns the size and both fill it.
+.arts-device-mockup__overlay-icon {
+  --_size: clamp(14px, 6.5cqw, 26px);
+
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--_size);
+  height: var(--_size);
+  font-size: var(--_size);
+  line-height: 1;
+
+}
+
+// (0,2,1): beats a host icon class that sizes its own <svg>.
+.arts-device-mockup__overlay .arts-device-mockup__overlay-icon svg {
+  width: 100%;
+  height: 100%;
+
+}
+
+// Zero specificity: an icon that sets its own fill (or `fill: none` for a stroked one) keeps it.
+:where(.arts-device-mockup__overlay-icon) svg {
+  fill: currentcolor;
+
+}
+
+.arts-device-mockup__link:hover .arts-device-mockup__overlay {
+  background: var(--arts-device-mockup-overlay-bg);
+
+}
+
+.arts-device-mockup__link:hover .arts-device-mockup__overlay-icon,
+.arts-device-mockup__link:hover .arts-device-mockup__overlay-label {
+  opacity: 1;
+  transform: translateY(0);
+
 }
 
 // ── Scroll on hover ───────────────────────────────────────────────────────────
