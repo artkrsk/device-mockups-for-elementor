@@ -5,7 +5,7 @@ Tags: elementor, mockup, device mockup, browser mockup, phone mockup
 Requires at least: 6.0
 Tested up to: 7.2
 Requires PHP: 8.0
-Stable tag: 1.0.3
+Stable tag: 1.1.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0
 GitHub Plugin URI: https://github.com/artkrsk/device-mockups-for-elementor/
@@ -79,7 +79,7 @@ In the Elementor editor, look for "Device Mockup" under the "Arts" category.
 
 == Changelog ==
 
-= 1.1.0 =
+= 1.1.0 – November 25, 2026 =
 * added: A linked mockup can show a label and an icon over its screen when hovered, with style controls for the background, colors and label typography.
 * added: Themes and other plugins can render a mockup from PHP with arts_device_mockups_render() or get its markup with arts_device_mockups_get().
 
